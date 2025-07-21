@@ -2,75 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hrishikesh Reddy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hrishikesh Reddy | Portfolio</title>
   <style>
+    /* Reset & Base */
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
     }
     body {
-      font-family: "Segoe UI", sans-serif;
-      background: #0f172a;
-      color: #f1f5f9;
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      background: #0f0f0f;
+      color: #f0f0f0;
+      scroll-behavior: smooth;
+    }
+    a { color: #64ffda; text-decoration: none; }
+    h1, h2 { color: #64ffda; }
+    section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    header {
+      background: #111;
+      padding: 20px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+    }
+    nav a {
+      margin-left: 20px;
+      font-weight: bold;
+    }
+    .hero {
+      text-align: center;
+      padding: 150px 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+    }
+    .hero p {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: #aaa;
+    }
+    .skills ul, .projects ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      list-style: none;
+      margin-top: 20px;
+    }
+    .skills li, .projects li {
+      background: #222;
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+    .projects li {
+      flex: 1 1 40%;
+    }
+    form {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 50px 20px;
-      min-height: 100vh;
+      gap: 10px;
+      margin-top: 20px;
     }
-    h1 {
-      font-size: 3rem;
-      color: #38bdf8;
-      margin-bottom: 10px;
+    input, textarea {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background: #1c1c1c;
+      color: #f0f0f0;
     }
-    p {
-      max-width: 600px;
-      text-align: center;
-      font-size: 1.2rem;
-      color: #cbd5e1;
-      margin-bottom: 30px;
-    }
-    .links {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .links a {
-      text-decoration: none;
-      color: #0f172a;
-      background-color: #38bdf8;
-      padding: 12px 24px;
-      border-radius: 6px;
+    button {
+      background: #64ffda;
+      color: #0f0f0f;
+      padding: 10px;
       font-weight: bold;
-      transition: 0.2s ease;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
     }
-    .links a:hover {
-      background-color: #0ea5e9;
-      transform: scale(1.05);
+    button:hover {
+      background: #52e0c4;
     }
     footer {
-      margin-top: auto;
-      padding: 20px;
+      text-align: center;
+      padding: 30px;
+      background: #111;
       font-size: 0.9rem;
-      color: #64748b;
+      color: #666;
+    }
+    @media(max-width: 600px) {
+      .projects li {
+        flex: 1 1 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>Hrishikesh Reddy</h1>
-  <p>Hi! I’m Hrishikesh — a student, coder, and AI enthusiast. I love tech, build cool things, and believe in staying curious. 👨‍💻🚀</p>
+  <header>
+    <div><strong>Hrishikesh Reddy</strong></div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-  <div class="links">
-    <a href="https://github.com/hrishikeshreddy" target="_blank">GitHub</a>
-    <a href="mailto:youremail@example.com">Email Me</a>
-    <a href="https://www.linkedin.com/in/hrishikeshreddy" target="_blank">LinkedIn</a>
-  </div>
+  <section class="hero visible">
+    <h1>Hello, I’m Hrishikesh</h1>
+    <p>Student • Future Engineer • AI + Web Dev Enthusiast</p>
+  </section>
 
-  <footer>© 2025 Hrishikesh Reddy. All rights reserved.</footer>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm a passionate student interested in AI, full-stack web development, and building cool projects. I love solving problems, making useful tools, and exploring the world of technology. Currently learning Python, JavaScript, and working on creative ideas!
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li>Python</li>
+      <li>HTML + CSS</li>
+      <li>JavaScript</li>
+      <li>Git & GitHub</li>
+      <li>AI Concepts</li>
+      <li>Roblox Lua</li>
+      <li>Responsive Design</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>Portfolio Website</strong><br/>This very site, hosted on Vercel with a custom domain!</li>
+      <li><strong>Timebomb Tool (Roblox)</strong><br/>Custom physics and cooldown system using Lua scripting</li>
+      <li><strong>Python CLI Tools</strong><br/>Console apps and mini-calculators for fun and practice</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form action="https://formspree.io/f/mnqevyla" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="_replyto" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 Hrishikesh Reddy. All rights reserved.
+  </footer>
+
+  <script>
+    // Animate sections on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    });
+    document.querySelectorAll("section").forEach(section => {
+      if (!section.classList.contains("hero")) {
+        observer.observe(section);
+      }
+    });
+  </script>
 
 </body>
 </html>
