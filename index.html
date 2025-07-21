@@ -1,94 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Hrishikesh Reddy | Portfolio</title>
-  <style>
-    :root{--bg:#111;--fg:#eee;--accent:#00c6ff;--fg2:#aaa}
-    .dark{--bg:#eee;--fg:#111;--fg2:#555;}
-    *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
-    body{font-family:sans-serif;background:var(--bg);color:var(--fg);}
-    header{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:1rem;background:var(--bg);z-index:10;}
-    nav{display:flex;gap:1rem;} nav a{color:var(--fg);text-decoration:none;}
-    .mobile-menu{display:none;cursor:pointer;} .resume-btn, .toggle{cursor:pointer;padding:0.5rem;border-radius:4px;background:var(--accent);color:#000;}
-    @media(max-width:700px){nav{display:none;flex-direction:column;background:var(--bg);position:absolute;top:60px;width:100%;} .mobile-menu{display:block;}}
-    section{padding:100px 20px;opacity:0;}
-    .section-title{font-size:2rem;margin-bottom:1rem;color:var(--accent);}
-    .typing{border-right:2px solid var(--fg);display:inline-block;width:0;overflow:hidden;white-space:nowrap;}
-    .projects, .blog-list{display:grid;gap:20px;}
-    .projects{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));}
-    .card, .blog-card{background:var(--bg);padding:1rem;border:1px solid var(--fg2);border-radius:8px;transform:translateY(20px);opacity:0;}
-    .card img{width:100%;height:auto;border-radius:5px;margin-bottom:0.5rem;}
-    .contact-form{display:flex;flex-direction:column;max-width:400px;margin:auto;}
-    .contact-form input, .contact-form textarea{margin:10px 0;padding:10px;border:none;border-radius:5px;}
-    .contact-form button{background:var(--accent);color:#000;padding:10px;border:none;border-radius:5px;cursor:pointer;}
-    footer{padding:2rem;text-align:center;color:var(--fg2);}
-  </style>
-</head>
-<body>
-<header>
-  <div><strong>Hrishikesh Reddy</strong></div>
-  <nav><a href="#hero">Home</a><a href="#about">About</a><a href="#projects">Projects</a><a href="#blog">Blog</a><a href="#contact">Contact</a><a class="resume-btn" href="resume.pdf" download>Download Resume</a></nav>
-  <div class="mobile-menu">☰</div><button class="toggle">🌙</button>
-</header>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Hrishikesh Reddy | Portfolio</title>
+<style>
+:root{--bg:#111;--fg:#eee;--accent:#00c6ff;--fg2:#aaa;--progress:#00c6ff}
+.dark{--bg:#eee;--fg:#111;--fg2:#555;--accent:#0072ff;--progress:#0072ff}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+body{font-family:sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden;}
+header{position:fixed;top:0;left:0;right:0;padding:1rem;display:flex;justify-content:space-between;align-items:center;background:var(--bg);z-index:100;}
+nav{display:flex;gap:1rem;}nav a{color:var(--fg);text-decoration:none;font-weight:500;transition:color .2s;}
+.resume-btn,.toggle{cursor:pointer;padding:.5rem;border-radius:4px;background:var(--accent);color:#000;}
+.toggle{font-size:1.2rem;}
+.mobile-menu{display:none;font-size:1.5rem;cursor:pointer;}
+@media(max-width:678px){nav{display:none;flex-direction:column;background:var(--bg);position:absolute;top:70px;width:100%;padding:1rem;} .mobile-menu{display:block;}}
+.progress-bar{position:fixed;top:0;left:0;height:4px;background:var(--progress);width:0;z-index:101;}
+section{padding:140px 20px;text-align:center;opacity:0;}
+.show{opacity:1!important;}
+.section-title{font-size:2rem;margin-bottom:1rem;color:var(--accent);}
+.typing{display:inline-block;border-right:2px solid var(--fg);overflow:hidden;white-space:nowrap;}
+.projects, .blog-list{display:grid;gap:20px;}
+.projects{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+.card, .blog-card{background:var(--bg);padding:1rem;border:1px solid var(--fg2);border-radius:10px;opacity:0;transform:translateY(30px);transition:.5s;}
+.card img{width:100%;height:auto;border-radius:6px;margin-bottom:.7rem;}
+.contact-form{display:flex;flex-direction:column;max-width:400px;margin:0 auto;}
+.contact-form input,.contact-form textarea{margin:8px 0;padding:10px;border:none;border-radius:6px;}
+.contact-form button{padding:12px;background:var(--accent);color:#000;border:none;cursor:pointer;border-radius:6px;transition:background .3s;}
+.contact-form button:hover{background:#00b2d6;}
+footer{padding:2rem;text-align:center;color:var(--fg2);}
+</style>
+</head><body>
 
-<section id="hero" class="section">
-  <h1>Hi, I’m Hrishikesh</h1>
-  <div class="typing">AI Enthusiast • Web Dev • Student</div>
+<div class="progress-bar"></div>
+<header><div><strong>Hrishikesh Reddy</strong></div>
+<nav><a href="#hero">Home</a><a href="#about">About</a><a href="#projects">Projects</a><a href="#blog">Blog</a><a href="#contact">Contact</a><a class="resume-btn" href="resume.pdf" download>Download Resume</a></nav>
+<div class="mobile-menu">☰</div><button class="toggle">🌙</button></header>
+
+<section id="hero"><h1>Hi, I'm Hrishikesh</h1><div class="typing">AI Enthusiast • Web Developer • Student</div></section>
+<section id="about"><div class="section-title">About Me</div><p>I craft smart web apps and AI explorers. Clean code, bold ideas, real impact.</p></section>
+<section id="projects" class="projects"><div class="section-title">Projects</div>
+<div class="card"><img src="https://via.placeholder.com/300" alt="project"><h3>Timebomb Tool</h3><p>Lua‑powered Roblox toolkit with physics & team safety modes.</p></div>
+<div class="card"><img src="https://via.placeholder.com/300" alt=""><h3>AI Chatbot</h3><p>Python Q&A assistant using personal knowledge corpora.</p></div>
 </section>
-
-<section id="about" class="section">
-  <div class="section-title">About Me</div>
-  <p>I build smart web apps and explore cutting-edge AI tech. Passionate about clean code and smooth UX.</p>
+<section id="blog" class="blog-list"><div class="section-title">Thoughts</div>
+<div class="blog-card"><h3>Why I Love AI</h3><p>AI isn't magic—it's human ideas automated with code.</p></div>
+<div class="blog-card"><h3>Animation Tips</h3><p>Smooth UI and fast motion make experiences feel alive.</p></div>
 </section>
-
-<section id="projects" class="section projects">
-  <div class="section-title">Projects</div>
-  <div class="card"><img src="https://via.placeholder.com/300" alt=""><h3>Timebomb Roblox Tool</h3><p>Lua script with physics & team‑safe mode.</p></div>
-  <div class="card"><img src="https://via.placeholder.com/300" alt=""><h3>AI Chatbot</h3><p>Custom Q&A bot built with Python.</p></div>
-  <div class="card"><img src="https://via.placeholder.com/300" alt=""><h3>Calculator App</h3><p>Feature‑rich CLI calculator in Python.</p></div>
-</section>
-
-<section id="blog" class="section blog-list">
-  <div class="section-title">Thoughts</div>
-  <div class="blog-card"><h3>Why I Love AI</h3><p>Building tools that help people with intelligent systems.</p></div>
-  <div class="blog-card"><h3>Web Animations Matter</h3><p>Smooth transitions make experiences feel alive.</p></div>
-</section>
-
-<section id="contact" class="section">
-  <div class="section-title">Contact Me</div>
-  <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-    <input type="hidden" name="access_key" value="b4d6d69c-e057-450c-b1c3-d7824c5abb28">
-    <input type="text" name="name" placeholder="Your name" required>
-    <input type="email" name="email" placeholder="Your email" required>
-    <textarea name="message" rows="5" placeholder="Your message" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-</section>
-
+<section id="contact"><div class="section-title">Contact Me</div>
+<form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+<input type="hidden" name="access_key" value="b4d6d69c-e057-450c-b1c3-d7824c5abb28">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+<button type="submit">Send</button>
+</form></section>
 <footer>&copy; 2025 Hrishikesh Reddy</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script>
-// Dark mode
-document.querySelector('.toggle').onclick = ()=>document.documentElement.classList.toggle('dark');
-// Mobile menu
-document.querySelector('.mobile-menu').onclick = ()=>{
-  const nav = document.querySelector('nav');
-  nav.style.display = nav.style.display==='flex'?'none':'flex';
+// dark mode
+document.querySelector('.toggle').onclick = () => document.documentElement.classList.toggle('dark');
+// mobile nav
+document.querySelector('.mobile-menu').onclick = ()=> {
+	const nav=document.querySelector('nav');
+	nav.style.display = nav.style.display==='flex'?'none':'flex';
 };
-// Typing effect
+// typing animation
 gsap.to('.typing', {duration:3, width:'20ch', ease:'steps(20)'});
-// Scroll animations
-gsap.utils.toArray('.section').forEach(section => {
-  gsap.fromTo(section, {y:40, opacity:0}, {
-    y:0, opacity:1, duration:1, scrollTrigger:{trigger:section, start:'top 80%'}
-  });
+// progress bar
+window.addEventListener('scroll', () => {
+  document.querySelector('.progress-bar').style.width =
+    (window.scrollY / (document.body.scrollHeight - window.innerHeight))*100 + '%';
 });
-// Card hover reveal
+// reveal sections & cards
+gsap.utils.toArray('section').forEach(s => {
+  gsap.to(s, {scrollTrigger:{trigger:s, start:'top 80%'}, opacity:1, y:0, duration:0.6});
+});
 gsap.utils.toArray('.card, .blog-card').forEach(el => {
-  gsap.from(el, {y:30, opacity:0, duration:0.8, delay:0.2, scrollTrigger:{trigger:el, start:'top 90%'}});
+  gsap.to(el, {scrollTrigger:{trigger:el, start:'top 90%'}, opacity:1, y:0, duration:0.5});
 });
 </script>
-</body>
-</html>
+
+</body></html>
