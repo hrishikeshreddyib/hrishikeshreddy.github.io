@@ -219,7 +219,7 @@
 <canvas id="matrixCanvas"></canvas>
 <!-- Everything else remains unchanged, trimmed for brevity -->
 <script>
-// Matrix Background
+
 const canvas = document.getElementById("matrixCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -242,7 +242,7 @@ function drawMatrix() {
 }
 setInterval(drawMatrix, 33);
 
-// Autocomplete commands
+
 const commands = ["help", "whoami", "projects", "eashan", "clear", "encrypt"];
 document.querySelectorAll("input.command-line").forEach(input => {
   input.addEventListener("input", function () {
@@ -252,12 +252,12 @@ document.querySelectorAll("input.command-line").forEach(input => {
   });
 });
 
-// Encrypt command
+
 function encryptMessage(msg) {
   return btoa(unescape(encodeURIComponent(msg)));
 }
 
-// Realistic typing
+
 function typeText(target, text, delay = 30, callback) {
   let i = 0;
   function type() {
@@ -271,7 +271,7 @@ function typeText(target, text, delay = 30, callback) {
   type();
 }
 
-// Replace runCommand function with encryption and animated typing
+
 function runCommand(cmd) {
   const lower = cmd.toLowerCase();
   if (lower.startsWith("encrypt ")) {
