@@ -3,218 +3,194 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hrishikesh Reddy – Portfolio</title>
+  <title>Hrishikesh Reddy - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <style>
-    html, body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
       height: 100%;
-      font-family: 'Courier New', monospace;
+      font-family: 'Fira Code', monospace;
       background: black;
+      color: #00ff00;
       overflow-x: hidden;
-      color: #00ff88;
     }
 
-    body::before {
-      content: "";
+    .boot-screen {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: url('https://media.tenor.com/xUPIfBfGOfEAAAAC/matrix.gif') repeat;
-      background-size: cover;
-      opacity: 0.05;
-      z-index: -1;
+      background: black;
+      padding: 2rem;
+      font-size: 14px;
+      white-space: pre-line;
+      overflow-y: auto;
+      z-index: 1000;
     }
 
-    .typewriter h1 {
-      overflow: hidden;
-      border-right: .15em solid #00ff88;
-      white-space: nowrap;
-      margin: 0 auto;
-      letter-spacing: .15em;
-      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-      font-size: 2rem;
-      text-align: center;
-      margin-top: 20vh;
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1em;
+      background: #00ff00;
+      animation: blink 0.8s step-end infinite;
+      vertical-align: bottom;
     }
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    @keyframes blink {
+      50% { opacity: 0; }
     }
 
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #00ff88 }
+    .hidden {
+      display: none;
     }
 
-    section {
-      padding: 80px 20px;
-      max-width: 800px;
-      margin: auto;
+    .content {
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.6s ease;
+      transition: opacity 1s ease, transform 0.5s ease;
+      transform: translateY(20px);
+      padding: 3rem;
     }
 
-    section.visible {
+    .show {
       opacity: 1;
       transform: translateY(0);
     }
 
-    h2 {
-      color: #00ffaa;
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 17px;
-      line-height: 1.6;
+    .section {
+      margin-bottom: 100px;
     }
 
     .contact-form input, .contact-form textarea {
-      background: black;
-      border: 1px solid #00ff88;
-      color: #00ff88;
-      padding: 10px;
+      display: block;
+      background: transparent;
+      border: 1px solid #00ff00;
+      color: #00ff00;
       width: 100%;
-      margin-bottom: 15px;
-      font-family: 'Courier New', monospace;
-    }
-
-    .contact-form button {
-      padding: 10px 20px;
-      border: none;
-      background: #00ff88;
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-      font-family: 'Courier New', monospace;
-      transition: 0.3s;
-    }
-
-    .contact-form button:hover {
-      background: #00ffaa;
-      box-shadow: 0 0 10px #00ffaa;
-    }
-
-    .glitch:hover {
-      text-shadow: 
-        1px 0 red,
-        -1px 0 blue;
-      animation: glitch 0.3s infinite;
-    }
-
-    @keyframes glitch {
-      0% { transform: translate(0); }
-      20% { transform: translate(-1px, 1px); }
-      40% { transform: translate(-1px, -1px); }
-      60% { transform: translate(1px, 1px); }
-      80% { transform: translate(1px, -1px); }
-      100% { transform: translate(0); }
+      padding: 10px;
+      margin-bottom: 10px;
     }
 
     .subscribe-box {
-      background: rgba(0, 255, 136, 0.05);
-      border: 2px solid rgba(0, 255, 136, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
       text-align: center;
-      margin-top: 50px;
-    }
-
-    .subscribe-box h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: #00ffaa;
-    }
-
-    .subscribe-box p {
-      font-size: 18px;
-      margin-bottom: 30px;
+      max-width: 500px;
+      margin: auto;
+      margin-top: 100px;
+      box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
     }
 
     .subscribe-btn {
       padding: 15px 30px;
       font-size: 18px;
       font-weight: bold;
-      background: #00ff88;
+      background: #ff0000;
       border: none;
-      color: black;
+      color: white;
       border-radius: 50px;
       cursor: pointer;
       text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
 
     .subscribe-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #00ffaa;
+      background: #cc0000;
     }
 
-    .youtube-logo {
-      width: 50px;
-      margin-bottom: 20px;
-    }
-
-    @media(max-width: 600px) {
-      .typewriter h1 {
-        font-size: 1.5rem;
-      }
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: url('https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif') center center / cover;
+      z-index: -1;
+      opacity: 0.15;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
+  <div class="stars"></div>
 
-  <div class="typewriter">
-    <h1>booting Hrishikesh's website...</h1>
+  <div class="boot-screen" id="boot">
+    <div id="boot-content"></div><div class="cursor"></div>
   </div>
 
-  <section class="glitch">
-    <h2>👨‍💻 About Me</h2>
-    <p>i like coding and messing with code, Operating systems 👾.</p>
-  </section>
+  <div class="content hidden" id="main-content">
+    <div class="section">
+      <h1>👨‍💻 Hrishikesh Reddy</h1>
+      <p>Hi! I'm a developer, student, and tech enthusiast who builds cool things for the web and loves AI, Python, and all things coding.</p>
+    </div>
 
-  <section>
-    <h2>📂 Projects</h2>
-    <p>From calculators to Roblox Lua scripts, I've built a variety of projects. Stay tuned, more coming soon!</p>
-  </section>
+    <div class="section contact-form">
+      <h2>📬 Contact Me</h2>
+      <form action="https://formspree.io/f/xwkgnyqr" method="POST">
+        <input type="text" name="name" required placeholder="Your Name" />
+        <input type="email" name="email" required placeholder="Your Email" />
+        <textarea name="message" required placeholder="Your Message" rows="5"></textarea>
+        <input type="submit" value="Send" />
+      </form>
+    </div>
 
-  <section>
-    <h2>📬 Contact Me</h2>
-    <form class="contact-form" action="https://formspree.io/f/xwkrvyzo" method="POST">
-      <input type="text" name="name" placeholder="Your name" required>
-      <input type="email" name="email" placeholder="Your email" required>
-      <textarea name="message" rows="5" placeholder="Your message" required></textarea>
-      <button type="submit">=> Send</button>
-    </form>
-  </section>
-
-  <section>
     <div class="subscribe-box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="youtube-logo">
-      <h1>Fun With Eashan</h1>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" style="width: 50px; margin-bottom: 20px;">
+      <h1 style="color: #ff4b2b;">Fun With Eashan</h1>
       <p>Subscribe for fun, learning, and awesome videos!</p>
       <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
     </div>
-  </section>
+  </div>
 
   <script>
-    // Scroll-triggered fade-in
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+    const bootLines = [
+      "[  OK  ] Booting into HrishikeshOS...",
+      "[  OK  ] Mounting Code Modules...",
+      "[  OK  ] Initializing Creativity Engine...",
+      "[  OK  ] Establishing AI Connection...",
+      "[  OK  ] Loading Portfolio UI...",
+      "[ DONE ] Hrishikesh Reddy boot complete.",
+      "",
+      ">> Press Enter to continue..."
+    ];
+
+    let index = 0;
+    const bootEl = document.getElementById("boot-content");
+
+    function showNextLine() {
+      if (index < bootLines.length) {
+        const line = document.createElement("div");
+        line.textContent = bootLines[index++];
+        bootEl.appendChild(line);
+        setTimeout(showNextLine, 500);
+      } else {
+        document.addEventListener("keydown", finishBoot);
+      }
+    }
+
+    function finishBoot() {
+      document.removeEventListener("keydown", finishBoot);
+      document.getElementById("boot").classList.add("hidden");
+      const content = document.getElementById("main-content");
+      content.classList.remove("hidden");
+      setTimeout(() => content.classList.add("show"), 50);
+    }
+
+    showNextLine();
+
+    // scroll-based reveal
+    const sections = document.querySelectorAll('.section');
+    window.addEventListener('scroll', () => {
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          sec.classList.add('show');
         } else {
-          entry.target.classList.remove('visible');
+          sec.classList.remove('show');
         }
       });
-    });
-
-    document.querySelectorAll('section').forEach(sec => {
-      observer.observe(sec);
     });
   </script>
 </body>
