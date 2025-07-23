@@ -3,75 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hrishikesh Reddy - Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <title>Hrishikesh Reddy | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    html, body {
-      height: 100%;
-      font-family: 'Fira Code', monospace;
-      background: black;
+
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      background: #000;
       color: #00ff00;
       overflow-x: hidden;
     }
 
-    .boot-screen {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: black;
-      padding: 2rem;
-      font-size: 14px;
-      white-space: pre-line;
-      overflow-y: auto;
-      z-index: 1000;
+    #boot {
+      white-space: pre-wrap;
+      padding: 20px;
+      height: 100vh;
+      background-color: #000;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
     }
 
-    .cursor {
-      display: inline-block;
-      width: 10px;
-      height: 1em;
-      background: #00ff00;
-      animation: blink 0.8s step-end infinite;
-      vertical-align: bottom;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .content {
+    #main {
       opacity: 0;
-      transition: opacity 1s ease, transform 0.5s ease;
-      transform: translateY(20px);
-      padding: 3rem;
+      transition: opacity 2s ease;
+      background: linear-gradient(270deg, #001100, #003300, #001100);
+      background-size: 600% 600%;
+      animation: bgShift 15s ease infinite;
+      min-height: 100vh;
+      padding: 50px 20px;
     }
 
-    .show {
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    section {
+      margin: 80px auto;
+      max-width: 800px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1.5s ease, transform 1.5s ease;
+    }
+
+    section.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0px);
     }
 
-    .section {
-      margin-bottom: 100px;
-    }
-
-    .contact-form input, .contact-form textarea {
-      display: block;
-      background: transparent;
-      border: 1px solid #00ff00;
+    h1, h2 {
       color: #00ff00;
+    }
+
+    p, a, label {
+      color: #ccffcc;
+      font-size: 18px;
+    }
+
+    input, textarea {
       width: 100%;
       padding: 10px;
-      margin-bottom: 10px;
+      background: #002200;
+      border: 1px solid #00ff00;
+      color: #00ff00;
+      font-family: inherit;
+      font-size: 16px;
+    }
+
+    button {
+      background: #00aa00;
+      color: black;
+      padding: 10px 20px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
     }
 
     .subscribe-box {
@@ -79,11 +91,10 @@
       border: 2px solid rgba(255, 255, 255, 0.1);
       padding: 40px;
       border-radius: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
       text-align: center;
-      max-width: 500px;
-      margin: auto;
-      margin-top: 100px;
-      box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
     }
 
     .subscribe-btn {
@@ -96,100 +107,95 @@
       border-radius: 50px;
       cursor: pointer;
       text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
 
     .subscribe-btn:hover {
-      background: #cc0000;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff0000;
     }
 
-    .stars {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: url('https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif') center center / cover;
-      z-index: -1;
-      opacity: 0.15;
-      pointer-events: none;
+    .youtube-logo {
+      width: 50px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="stars"></div>
+  <div id="boot"></div>
 
-  <div class="boot-screen" id="boot">
-    <div id="boot-content"></div><div class="cursor"></div>
-  </div>
+  <div id="main">
+    <section id="intro">
+      <h1>Hey, I'm Hrishikesh</h1>
+      <p>Welcome to my portfolio. I love AI, coding, STEM, and building cool stuff.</p>
+    </section>
 
-  <div class="content hidden" id="main-content">
-    <div class="section">
-      <h1>👨‍💻 Hrishikesh Reddy</h1>
-      <p>Hi! I'm a developer, student, and tech enthusiast who builds cool things for the web and loves AI, Python, and all things coding.</p>
-    </div>
+    <section id="projects">
+      <h2>🚀 Projects</h2>
+      <p>I make Python tools, AI experiments, Roblox scripts, and cool digital builds. Always learning, always hacking.</p>
+    </section>
 
-    <div class="section contact-form">
+    <section id="contact">
       <h2>📬 Contact Me</h2>
-      <form action="https://formspree.io/f/xwkgnyqr" method="POST">
-        <input type="text" name="name" required placeholder="Your Name" />
-        <input type="email" name="email" required placeholder="Your Email" />
-        <textarea name="message" required placeholder="Your Message" rows="5"></textarea>
-        <input type="submit" value="Send" />
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="YOUR_API_KEY_HERE">
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+        <label>Message:</label><br>
+        <textarea name="message" rows="5" required></textarea><br><br>
+        <button type="submit">Send</button>
       </form>
-    </div>
+    </section>
 
-    <div class="subscribe-box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" style="width: 50px; margin-bottom: 20px;">
-      <h1 style="color: #ff4b2b;">Fun With Eashan</h1>
-      <p>Subscribe for fun, learning, and awesome videos!</p>
-      <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
-    </div>
+    <section id="shoutout">
+      <div class="subscribe-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="youtube-logo">
+        <h1>Fun With Eashan</h1>
+        <p>Subscribe for fun, learning, and awesome videos!</p>
+        <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
+      </div>
+    </section>
   </div>
 
   <script>
     const bootLines = [
-      "[  OK  ] Booting into HrishikeshOS...",
-      "[  OK  ] Mounting Code Modules...",
-      "[  OK  ] Initializing Creativity Engine...",
-      "[  OK  ] Establishing AI Connection...",
-      "[  OK  ] Loading Portfolio UI...",
-      "[ DONE ] Hrishikesh Reddy boot complete.",
-      "",
-      ">> Press Enter to continue..."
+      "Booting HrishikeshOS v1.0...",
+      "Initializing system...",
+      "Loading AI modules...",
+      "Setting up coding environment...",
+      "Calibrating sensors...",
+      "Connecting to web3...",
+      "Fetching terminal logs...",
+      "Starting portfolio...",
+      "System ready."
     ];
 
-    let index = 0;
-    const bootEl = document.getElementById("boot-content");
+    const bootDiv = document.getElementById("boot");
+    let lineIndex = 0;
 
-    function showNextLine() {
-      if (index < bootLines.length) {
-        const line = document.createElement("div");
-        line.textContent = bootLines[index++];
-        bootEl.appendChild(line);
-        setTimeout(showNextLine, 500);
+    function showBootLine() {
+      if (lineIndex < bootLines.length) {
+        bootDiv.textContent += bootLines[lineIndex] + "\n";
+        lineIndex++;
+        setTimeout(showBootLine, 300);
       } else {
-        document.addEventListener("keydown", finishBoot);
+        document.getElementById("main").style.opacity = 1;
+        bootDiv.style.display = "none";
       }
     }
 
-    function finishBoot() {
-      document.removeEventListener("keydown", finishBoot);
-      document.getElementById("boot").classList.add("hidden");
-      const content = document.getElementById("main-content");
-      content.classList.remove("hidden");
-      setTimeout(() => content.classList.add("show"), 50);
-    }
+    showBootLine();
 
-    showNextLine();
-
-    // scroll-based reveal
-    const sections = document.querySelectorAll('.section');
-    window.addEventListener('scroll', () => {
+    // Scroll Animations
+    const sections = document.querySelectorAll("section");
+    window.addEventListener("scroll", () => {
+      const triggerBottom = window.innerHeight * 0.85;
       sections.forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          sec.classList.add('show');
-        } else {
-          sec.classList.remove('show');
-        }
+        const top = sec.getBoundingClientRect().top;
+        if (top < triggerBottom) sec.classList.add("visible");
+        else sec.classList.remove("visible");
       });
     });
   </script>
