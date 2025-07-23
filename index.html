@@ -19,6 +19,11 @@
       overflow-x: hidden;
     }
 
+    a {
+      color: #00ff00;
+      text-decoration: underline;
+    }
+
     .boot-screen {
       height: 100vh;
       background: black;
@@ -31,21 +36,46 @@
 
     .main-content {
       display: none;
+      padding: 40px 20px 100px;
+    }
+
+    section {
+      margin: 40px 0;
+    }
+
+    h1, h2 {
+      color: #00ffcc;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .subscribe-box {
+      background: #001a1a;
       padding: 20px;
-      min-height: 100vh;
-      padding-bottom: 80px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid #00ff00;
     }
 
-    .terminal-output {
-      white-space: pre-wrap;
-      margin-bottom: 40px;
+    .subscribe-btn {
+      margin-top: 10px;
+      padding: 8px 20px;
+      background: #00ff00;
+      color: black;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      display: inline-block;
     }
 
-    .terminal-line {
-      margin-bottom: 8px;
+    .subscribe-btn:hover {
+      background: #00cc00;
     }
 
-    .terminal-input {
+    .terminal-bar {
       position: fixed;
       bottom: 0;
       left: 0;
@@ -53,11 +83,11 @@
       background: #000;
       color: #00ff00;
       padding: 10px 20px;
-      font-size: 14px;
       border-top: 1px solid #00ff00;
       display: flex;
       align-items: center;
       gap: 10px;
+      z-index: 10;
     }
 
     input.command-line {
@@ -69,28 +99,102 @@
       outline: none;
     }
 
-    @media (max-width: 600px) {
-      .terminal-input {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    .full-terminal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: #00ff00;
+      padding: 20px;
+      overflow-y: auto;
+      display: none;
+      z-index: 999;
+    }
 
-      input.command-line {
-        width: 100%;
-      }
+    .terminal-output {
+      white-space: pre-wrap;
+      padding-bottom: 80px;
+    }
+
+    .terminal-line {
+      margin-bottom: 8px;
+    }
+
+    .close-terminal {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: #ff0033;
+      color: white;
+      border: none;
+      font-size: 20px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .close-terminal:hover {
+      background: #cc0022;
     }
   </style>
 </head>
 <body>
+  <!-- Boot Screen -->
   <div class="boot-screen" id="bootScreen"></div>
 
+  <!-- Main Content -->
   <div class="main-content" id="mainContent">
-    <div class="terminal-output" id="terminalOutput"></div>
+    <section id="about">
+      <h1>Hi, I'm Hrishikesh 👋</h1>
+      <p>AI enthusiast | Future FAANG engineer | JEE Aspirant | Code wizard</p>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul>
+        <li>Python Calculator</li>
+        <li>Roblox Lua Timebomb Tool</li>
+        <li>Fun Portfolio Website</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="YOUR_KEY_HERE" />
+        <input type="text" name="name" placeholder="Your Name" required><br><br>
+        <input type="email" name="email" placeholder="Your Email" required><br><br>
+        <textarea name="message" placeholder="Your Message" required rows="5"></textarea><br><br>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <section id="shoutout">
+      <div class="subscribe-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" width="50">
+        <h2>Fun With Eashan</h2>
+        <p>Subscribe for fun, learning, and awesome videos!</p>
+        <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank" rel="noopener">Subscribe</a>
+      </div>
+    </section>
   </div>
 
-  <div class="terminal-input">
+  <!-- Terminal Bar -->
+  <div class="terminal-bar">
     <span>&gt;</span>
-    <input type="text" class="command-line" placeholder="Type a command like 'help', 'whoami'..." onkeydown="handleCommand(event)" autofocus>
+    <input type="text" class="command-line" placeholder="Type a command like 'help', 'whoami'..." onkeydown="expandTerminal(event)">
+  </div>
+
+  <!-- Full Terminal -->
+  <div class="full-terminal" id="fullTerminal">
+    <button class="close-terminal" onclick="closeTerminal()">×</button>
+    <div class="terminal-output" id="terminalOutput"></div>
+    <div class="terminal-bar">
+      <span>&gt;</span>
+      <input type="text" class="command-line" placeholder="Enter command..." onkeydown="handleCommand(event)">
+    </div>
   </div>
 
   <audio id="typeSound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
@@ -98,17 +202,17 @@
   <script>
     const bootScreen = document.getElementById("bootScreen");
     const mainContent = document.getElementById("mainContent");
+    const fullTerminal = document.getElementById("fullTerminal");
     const terminalOutput = document.getElementById("terminalOutput");
     const typeSound = document.getElementById("typeSound");
 
-    const randomBootLines = [
+    const bootLines = [
       "[ OK ] Mounted /home.",
       "[ OK ] Mounted /boot.",
       "[ OK ] Started Network Manager.",
       "[ OK ] Started GNOME Display Manager.",
       "[ OK ] Reached target Basic System.",
       "[INFO] Initializing AI module...",
-      "[INFO] Starting Hrishikesh Engine...",
       "[ OK ] Loaded Kernel Modules.",
       "[ OK ] Reached target Graphical Interface.",
       "[FAILED] Failed to start Bluetooth service.",
@@ -131,66 +235,79 @@
       "[ OK ] AI engine warmed up...",
       "[ OK ] Portfolio mode: ACTIVE",
       "[ OK ] Loading custom commands...",
-      "[DONE] System ready."
+      "[DONE] System ready.",
+      "Launching Hrishikesh's Portfolio..."
     ];
-
-    // Generate 40 boot lines including filler
-    const logs = [];
-    for (let i = 0; i < 37; i++) {
-      const randomIndex = Math.floor(Math.random() * randomBootLines.length);
-      logs.push(randomBootLines[randomIndex]);
-    }
-    logs.push("[ OK ] Boot complete.");
-    logs.push("Launching Hrishikesh's Portfolio...");
 
     let i = 0;
     function typeLog() {
-      if (i < logs.length) {
-        bootScreen.innerHTML += logs[i] + "\n";
+      if (i < 40) {
+        const line = bootLines[Math.floor(Math.random() * bootLines.length)];
+        bootScreen.innerHTML += line + "\n";
         bootScreen.scrollTop = bootScreen.scrollHeight;
         typeSound.currentTime = 0;
         typeSound.play();
         i++;
-        setTimeout(typeLog, 80);
+        setTimeout(typeLog, 60);
       } else {
         setTimeout(() => {
           bootScreen.style.display = "none";
           mainContent.style.display = "block";
-        }, 800);
+        }, 500);
       }
+    }
+
+    window.onload = typeLog;
+
+    function expandTerminal(e) {
+      if (e.key === "Enter") {
+        const input = e.target.value.trim();
+        if (input) {
+          fullTerminal.style.display = "block";
+          appendToTerminal("> " + input);
+          runCommand(input);
+          e.target.value = "";
+          setTimeout(() => {
+            fullTerminal.querySelector("input.command-line").focus();
+          }, 100);
+        }
+      }
+    }
+
+    function closeTerminal() {
+      fullTerminal.style.display = "none";
     }
 
     function handleCommand(e) {
       if (e.key === "Enter") {
-        const val = e.target.value.trim();
-        if (val === "") return;
-
-        // Print input
-        appendToTerminal("> " + val);
-
-        const lowerVal = val.toLowerCase();
-        switch (lowerVal) {
-          case "help":
-            appendToTerminal("Available commands: help, whoami, projects, eashan, clear");
-            break;
-          case "whoami":
-            appendToTerminal("Hrishikesh Reddy – AI nerd, JEE chad, code lover.");
-            break;
-          case "projects":
-            appendToTerminal("1. Python Calculator\n2. Roblox Lua Timebomb Tool\n3. Fun Portfolio Website");
-            break;
-          case "eashan":
-            appendToTerminal("Shoutout to 'Fun With Eashan'!\nhttps://youtube.com/@funwitheashan1219");
-            break;
-          case "clear":
-            terminalOutput.innerHTML = "";
-            break;
-          default:
-            appendToTerminal(`Command not found: ${val}`);
-        }
-
+        const input = e.target.value.trim();
+        if (!input) return;
+        appendToTerminal("> " + input);
+        runCommand(input);
         e.target.value = "";
-        terminalOutput.scrollTop = terminalOutput.scrollHeight;
+      }
+    }
+
+    function runCommand(cmd) {
+      const lower = cmd.toLowerCase();
+      switch (lower) {
+        case "help":
+          appendToTerminal("Available commands: help, whoami, projects, eashan, clear");
+          break;
+        case "whoami":
+          appendToTerminal("Hrishikesh Reddy – AI nerd, JEE chad, code lover.");
+          break;
+        case "projects":
+          appendToTerminal("1. Python Calculator\n2. Roblox Lua Timebomb Tool\n3. Fun Portfolio Website");
+          break;
+        case "eashan":
+          appendToTerminal("Shoutout to 'Fun With Eashan'!\nhttps://youtube.com/@funwitheashan1219");
+          break;
+        case "clear":
+          terminalOutput.innerHTML = "";
+          break;
+        default:
+          appendToTerminal(`Command not found: ${cmd}`);
       }
     }
 
@@ -199,9 +316,8 @@
       line.className = "terminal-line";
       line.textContent = text;
       terminalOutput.appendChild(line);
+      fullTerminal.scrollTop = fullTerminal.scrollHeight;
     }
-
-    window.onload = typeLog;
   </script>
 </body>
 </html>
