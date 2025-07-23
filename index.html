@@ -7,304 +7,180 @@
   <title>Hrishikesh Reddy's Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --green: #00ff00;
-      --green-hover: #00cc00;
-      --bg-gradient: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
-    html, body {
+    body {
       font-family: 'Fira Code', monospace;
-      background: var(--bg-gradient);
-      color: var(--green);
+      background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+      color: #00ff00;
       overflow-x: hidden;
-      scroll-behavior: smooth;
     }
-
-    canvas#matrixCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: black;
-    }
-
-    a {
-      color: var(--green);
-      text-decoration: underline;
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease forwards;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .main-content, .terminal-bar, .full-terminal {
-      backdrop-filter: blur(5px);
-    }
-
-    /* Boot Screen */
     .boot-screen {
       height: 100vh;
       background: black;
-      color: var(--green);
+      color: #00ff00;
       font-size: 14px;
       padding: 20px;
       white-space: pre-wrap;
       overflow-y: auto;
     }
-
-    /* Main Content */
     .main-content {
       display: none;
-      padding: 40px 20px 100px;
+      padding: 50px 20px;
+      animation: fadeIn 2s ease forwards;
     }
-
     section {
       margin: 40px 0;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
     }
-
-    h1, h2 {
-      color: #00ffcc;
-      margin-bottom: 10px;
-      text-shadow: 0 0 8px #00ffcc;
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    form input, form textarea, form button {
-      font-family: 'Fira Code', monospace;
-      font-size: 14px;
-      padding: 10px;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid var(--green);
-      color: var(--green);
-      margin-bottom: 15px;
-      border-radius: 5px;
-      transition: border-color 0.3s, background-color 0.3s;
+    h1, h2, p {
+      margin-bottom: 20px;
     }
-
-    form input:focus, form textarea:focus {
-      border-color: var(--green-hover);
-      background-color: rgba(0, 0, 0, 0.7);
-      outline: none;
-    }
-
-    form button {
-      background: var(--green);
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    form button:hover {
-      background: var(--green-hover);
-    }
-
-    .subscribe-box {
-      background: rgba(0, 20, 20, 0.7);
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      border: 1px solid var(--green);
-    }
-
-    .subscribe-btn {
-      margin-top: 10px;
-      padding: 8px 20px;
-      background: var(--green);
-      color: black;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: bold;
-      display: inline-block;
-    }
-
-    .subscribe-btn:hover {
-      background: var(--green-hover);
-    }
-
-    .terminal-bar {
+    .terminal-input {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: black;
-      color: var(--green);
-      padding: 10px 20px;
-      border-top: 1px solid var(--green);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      z-index: 10;
+      background: #000;
+      color: #00ff00;
+      padding: 10px;
+      font-family: 'Fira Code', monospace;
+      border-top: 1px solid #00ff00;
     }
-
     input.command-line {
-      flex: 1;
       background: transparent;
       border: none;
-      color: var(--green);
+      color: #00ff00;
+      width: 95%;
       font-size: 14px;
       outline: none;
     }
-
-    .full-terminal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      color: var(--green);
-      padding: 20px;
-      overflow-y: auto;
-      display: none;
-      z-index: 999;
-    }
-
-    .terminal-output {
-      white-space: pre-wrap;
-      padding-bottom: 80px;
-    }
-
-    .terminal-line {
-      margin-bottom: 8px;
-    }
-
-    .close-terminal {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      background: #ff0033;
-      color: white;
-      border: none;
-      font-size: 20px;
-      padding: 4px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .close-terminal:hover {
-      background: #cc0022;
-    }
-
-    @media (max-width: 600px) {
-      form input, form textarea {
-        font-size: 12px;
-      }
-
-      .terminal-bar {
-        flex-direction: column;
-        align-items: flex-start;
+    @keyframes fadeIn {
+      to {
+        display: block;
+        opacity: 1;
       }
     }
   </style>
 </head>
 <body>
-<canvas id="matrixCanvas"></canvas>
-<!-- Everything else remains unchanged, trimmed for brevity -->
-<script>
+  <div class="boot-screen" id="bootScreen"></div>
 
-const canvas = document.getElementById("matrixCanvas");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const letters = "01";
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = Array(Math.floor(columns)).fill(1);
-function drawMatrix() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#0F0";
-  ctx.font = fontSize + "px monospace";
-  for (let i = 0; i < drops.length; i++) {
-    const text = letters[Math.floor(Math.random() * letters.length)];
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-    if (drops[i] * fontSize > canvas.height || Math.random() > 0.95) drops[i] = 0;
-    drops[i]++;
-  }
-}
-setInterval(drawMatrix, 33);
+  <div class="main-content" id="mainContent">
+    <section id="about">
+      <h1>Hi, I'm Hrishikesh</h1>
+      <p>AI enthusiast | Future FAANG engineer | JEE Aspirant | Code wizard</p>
+    </section>
 
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul>
+        <li>Python Calculator</li>
+        <li>Roblox Lua Timebomb Tool</li>
+        <li>Fun Portfolio Website</li>
+      </ul>
+    </section>
 
-const commands = ["help", "whoami", "projects", "eashan", "clear", "encrypt"];
-document.querySelectorAll("input.command-line").forEach(input => {
-  input.addEventListener("input", function () {
-    const val = this.value.toLowerCase();
-    const match = commands.find(c => c.startsWith(val));
-    if (match && val.length > 0) this.value = match;
-  });
-});
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="YOUR_KEY_HERE" />
+        <input type="text" name="name" placeholder="Your Name" required><br><br>
+        <input type="email" name="email" placeholder="Your Email" required><br><br>
+        <textarea name="message" placeholder="Your Message" required></textarea><br><br>
+        <button type="submit">Send</button>
+      </form>
+    </section>
 
+    <section id="shoutout">
+      <div class="subscribe-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="youtube-logo" width="50">
+        <h2>Fun With Eashan</h2>
+        <p>Subscribe for fun, learning, and awesome videos!</p>
+        <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
+      </div>
+    </section>
+  </div>
 
-function encryptMessage(msg) {
-  return btoa(unescape(encodeURIComponent(msg)));
-}
+  <div class="terminal-input">
+    <span>&gt;</span> <input type="text" class="command-line" placeholder="Type a command like 'help', 'whoami'..." onkeydown="handleCommand(event)">
+  </div>
 
+  <audio id="typeSound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
 
-function typeText(target, text, delay = 30, callback) {
-  let i = 0;
-  function type() {
-    if (i < text.length) {
-      target.textContent += text[i++];
-      setTimeout(type, delay);
-    } else if (callback) {
-      callback();
+  <script>
+    const logs = [
+      "[ OK ] Mounted /home.",
+      "[ OK ] Mounted /boot.",
+      "[INFO] Starting Hrishikesh Engine...",
+      "[ OK ] Linked portfolio modules.",
+      "[BOOT] Terminal instance launched.",
+      "[DONE] System ready.",
+      "",
+      "Starting Hrishikesh's Portfolio..."
+    ];
+
+    const bootScreen = document.getElementById("bootScreen");
+    const mainContent = document.getElementById("mainContent");
+    const typeSound = document.getElementById("typeSound");
+
+    let i = 0;
+
+    function typeLog() {
+      if (i < logs.length) {
+        bootScreen.innerHTML += logs[i] + "\\n";
+        typeSound.play();
+        i++;
+        setTimeout(typeLog, 500);
+      } else {
+        setTimeout(() => {
+          bootScreen.style.display = "none";
+          mainContent.style.display = "block";
+          revealSections();
+        }, 1000);
+      }
     }
-  }
-  type();
-}
 
-
-function runCommand(cmd) {
-  const lower = cmd.toLowerCase();
-  if (lower.startsWith("encrypt ")) {
-    const message = cmd.slice(8).trim();
-    const encrypted = encryptMessage(message);
-    appendToTerminal("Encrypted message: " + encrypted, true);
-    return;
-  }
-  const responses = {
-    help: "Available commands:\n- help\n- whoami\n- projects\n- eashan\n- encrypt [text]\n- clear",
-    whoami: "Hrishikesh Reddy",
-    projects: "1. Python Calculator\n2. Roblox Lua Timebomb Tool\n3. Fun Portfolio Website",
-    eashan: "Shoutout to 'Fun With Eashan'!\nhttps://youtube.com/@funwitheashan1219",
-    clear: ""
-  };
-  if (responses[lower] !== undefined) {
-    if (lower === "clear") {
-      terminalOutput.innerHTML = "";
-    } else {
-      appendToTerminal(responses[lower], true);
+    function revealSections() {
+      const sections = document.querySelectorAll("section");
+      sections.forEach((sec, index) => {
+        setTimeout(() => sec.classList.add("visible"), index * 500);
+      });
     }
-  } else {
-    appendToTerminal("Command not found: " + cmd, true);
-  }
-}
 
-function appendToTerminal(text, animated = false) {
-  const line = document.createElement("div");
-  line.className = "terminal-line";
-  terminalOutput.appendChild(line);
-  if (animated) {
-    typeText(line, text);
-  } else {
-    line.textContent = text;
-  }
-  fullTerminal.scrollTop = fullTerminal.scrollHeight;
+    function handleCommand(e) {
+      if (e.key === "Enter") {
+        const val = e.target.value.toLowerCase();
+        switch(val) {
+          case "help":
+            alert("Commands: help, whoami, eashan, projects");
+            break;
+          case "whoami":
+            alert("Hrishikesh Reddy – AI nerd, JEE chad, code lover.");
+            break;
+          case "eashan":
+            alert("Shoutout to 'Fun With Eashan'!");
+            break;
+          case "projects":
+            alert("Projects: Calculator, Lua Timebomb Tool, Portfolio Website");
+            break;
+          default:
+            alert("Unknown command: " + val);
+        }
+        e.target.value = "";
+      }
+    }
+
+    window.onload = typeLog;
+  </script>
+</body>
+</html>
