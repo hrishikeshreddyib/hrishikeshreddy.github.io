@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hrishikesh Reddy's Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <style>
     :root {
       --green: #00ff00;
-      --bg: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+      --green-hover: #00cc00;
+      --bg-gradient: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
     }
 
     * {
@@ -19,28 +20,31 @@
 
     html, body {
       font-family: 'Fira Code', monospace;
-      background: var(--bg);
+      background: var(--bg-gradient);
       color: var(--green);
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
 
-    h1, h2, p, li, a, label {
-      color: var(--green);
-    }
-
     a {
+      color: var(--green);
       text-decoration: underline;
     }
 
-    section {
+    .fade-in {
       opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 1s forwards;
-      animation-delay: 0.5s;
-      margin: 40px 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
     }
 
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Boot Screen */
     .boot-screen {
       height: 100vh;
       background: black;
@@ -51,63 +55,75 @@
       overflow-y: auto;
     }
 
+    /* Main Content */
     .main-content {
       display: none;
       padding: 40px 20px 100px;
-      animation: fadeInMain 1.5s ease forwards;
     }
 
-    .subscribe-box {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border: 1px solid var(--green);
-      border-radius: 10px;
-      text-align: center;
+    section {
+      margin: 40px 0;
     }
 
-    .subscribe-btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 20px;
-      background: var(--green);
-      color: black;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .subscribe-btn:hover {
-      background: #00cc00;
-    }
-
-    form input,
-    form textarea {
-      width: 100%;
-      padding: 10px;
+    h1, h2 {
+      color: #00ffcc;
       margin-bottom: 10px;
-      background: black;
+    }
+
+    form input, form textarea, form button {
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      padding: 10px;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
       border: 1px solid var(--green);
       color: var(--green);
+      margin-bottom: 15px;
       border-radius: 5px;
-      font-family: 'Fira Code', monospace;
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    form input:focus, form textarea:focus {
+      border-color: var(--green-hover);
+      background-color: rgba(0, 0, 0, 0.7);
+      outline: none;
     }
 
     form button {
-      padding: 10px 20px;
       background: var(--green);
-      color: black;
+      color: #000;
       font-weight: bold;
-      border: none;
-      border-radius: 5px;
       cursor: pointer;
     }
 
     form button:hover {
-      background: #00cc00;
+      background: var(--green-hover);
     }
 
+    .subscribe-box {
+      background: rgba(0, 20, 20, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid var(--green);
+    }
+
+    .subscribe-btn {
+      margin-top: 10px;
+      padding: 8px 20px;
+      background: var(--green);
+      color: black;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    .subscribe-btn:hover {
+      background: var(--green-hover);
+    }
+
+    /* Terminal Bar */
     .terminal-bar {
       position: fixed;
       bottom: 0;
@@ -119,6 +135,7 @@
       border-top: 1px solid var(--green);
       display: flex;
       align-items: center;
+      gap: 10px;
       z-index: 10;
     }
 
@@ -131,6 +148,7 @@
       outline: none;
     }
 
+    /* Full Terminal */
     .full-terminal {
       position: fixed;
       top: 0;
@@ -171,36 +189,30 @@
       background: #cc0022;
     }
 
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
+    @media (max-width: 600px) {
+      form input, form textarea {
+        font-size: 12px;
       }
-    }
 
-    @keyframes fadeInMain {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
+      .terminal-bar {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
 <body>
-
   <!-- Boot Screen -->
   <div class="boot-screen" id="bootScreen"></div>
 
   <!-- Main Content -->
   <div class="main-content" id="mainContent">
-    <section id="about">
+    <section class="fade-in" id="about">
       <h1>Hi, I'm Hrishikesh 👋</h1>
-      <p>i love coding,ai,OSes</p>
+      <p>AI enthusiast | Future FAANG engineer | JEE Aspirant | Code wizard</p>
     </section>
 
-    <section id="projects">
+    <section class="fade-in" id="projects">
       <h2>Projects</h2>
       <ul>
         <li>Python Calculator</li>
@@ -209,7 +221,7 @@
       </ul>
     </section>
 
-    <section id="contact">
+    <section class="fade-in" id="contact">
       <h2>Contact Me</h2>
       <form action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="YOUR_KEY_HERE" />
@@ -220,12 +232,12 @@
       </form>
     </section>
 
-    <section id="shoutout">
+    <section class="fade-in" id="shoutout">
       <div class="subscribe-box">
         <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" width="50">
         <h2>Fun With Eashan</h2>
         <p>Subscribe for fun, learning, and awesome videos!</p>
-        <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219" target="_blank">Subscribe</a>
+        <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank" rel="noopener">Subscribe</a>
       </div>
     </section>
   </div>
@@ -257,34 +269,21 @@
 
     const bootLines = [
       "[ OK ] Mounted /home.",
-      "[ OK ] Mounted /boot.",
-      "[ OK ] Started Network Manager.",
       "[ OK ] Started GNOME Display Manager.",
-      "[ OK ] Reached target Basic System.",
-      "[INFO] Initializing AI module...",
       "[ OK ] Loaded Kernel Modules.",
-      "[ OK ] Reached target Graphical Interface.",
-      "[FAILED] Failed to start Bluetooth service.",
-      "[ OK ] Started Authorization Manager.",
-      "[ OK ] Created slice system-user.slice.",
-      "[ OK ] Started System Logging Service.",
-      "[ OK ] Started Virtual Memory Management.",
-      "[ OK ] Reached target Network.",
-      "[ OK ] Listening on CUPS Scheduler.",
-      "[ OK ] Started Hostname Service.",
-      "[ OK ] Started Time & Date Service.",
-      "[ OK ] Started D-Bus System Message Bus.",
-      "[ OK ] Detected CPU Architecture: x86_64",
+      "[ OK ] Started Network Manager.",
+      "[ OK ] Initialized Hrishikesh Engine.",
+      "[ OK ] AI Personality Booted...",
       "[ OK ] Linked portfolio modules.",
-      "[ OK ] Initialized Hrishikesh Terminal.",
-      "[ OK ] Activated resume from suspend.",
-      "[ OK ] Reached target User and Session",
-      "[BOOT] Terminal instance launched.",
-      "[ OK ] Mounted Hrishikesh's Brain™",
-      "[ OK ] AI engine warmed up...",
+      "[ OK ] Terminal interface active.",
+      "[ OK ] Started System Logging Service.",
+      "[FAILED] Failed to start Bluetooth.",
       "[ OK ] Portfolio mode: ACTIVE",
-      "[ OK ] Loading custom commands...",
-      "[DONE] System ready.",
+      "[ OK ] Listening on Web3Forms API.",
+      "[ OK ] Reached target User Session.",
+      "[ OK ] Mounted Hrishikesh's Brain™",
+      "[BOOT] Terminal ready.",
+      "[DONE] System Ready.",
       "Launching Hrishikesh's Portfolio..."
     ];
 
@@ -292,7 +291,7 @@
     function typeLog() {
       if (i < 40) {
         const line = bootLines[Math.floor(Math.random() * bootLines.length)];
-        bootScreen.innerHTML += line + "\\n";
+        bootScreen.innerHTML += line + "\n";
         bootScreen.scrollTop = bootScreen.scrollHeight;
         typeSound.currentTime = 0;
         typeSound.play();
@@ -302,6 +301,10 @@
         setTimeout(() => {
           bootScreen.style.display = "none";
           mainContent.style.display = "block";
+          document.querySelectorAll('.fade-in').forEach((el, idx) => {
+            el.style.animationDelay = `${0.2 + idx * 0.2}s`;
+            el.classList.add('fade-in');
+          });
         }, 500);
       }
     }
@@ -341,16 +344,16 @@
       const lower = cmd.toLowerCase();
       switch (lower) {
         case "help":
-          appendToTerminal("Available commands: help, whoami, projects, eashan, clear");
+          appendToTerminal("Available commands:\n- help\n- whoami\n- projects\n- eashan\n- clear");
           break;
         case "whoami":
           appendToTerminal("Hrishikesh Reddy – AI nerd, JEE chad, code lover.");
           break;
         case "projects":
-          appendToTerminal("1. Python Calculator\\n2. Roblox Lua Timebomb Tool\\n3. Fun Portfolio Website");
+          appendToTerminal("1. Python Calculator\n2. Roblox Lua Timebomb Tool\n3. Fun Portfolio Website");
           break;
         case "eashan":
-          appendToTerminal("Shoutout to 'Fun With Eashan'!\\nhttps://youtube.com/@funwitheashan1219");
+          appendToTerminal("Shoutout to 'Fun With Eashan'!\nhttps://youtube.com/@funwitheashan1219");
           break;
         case "clear":
           terminalOutput.innerHTML = "";
