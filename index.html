@@ -1,224 +1,186 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hrishikesh Reddy – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hrishikesh Reddy's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <style>
     * {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
     body {
-      background: radial-gradient(#001100, #000000);
-      font-family: 'Courier New', monospace;
+      font-family: 'Fira Code', monospace;
+      background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
       color: #00ff00;
       overflow-x: hidden;
     }
-
-    /* Animated background */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 200%; height: 200%;
-      background-image: repeating-linear-gradient(45deg, rgba(0,255,0,0.05) 0px, transparent 1px),
-                        repeating-linear-gradient(-45deg, rgba(0,255,0,0.05) 0px, transparent 1px);
-      animation: moveBackground 30s linear infinite;
-      z-index: -1;
-    }
-
-    @keyframes moveBackground {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-50%, -50%); }
-    }
-
     .boot-screen {
       height: 100vh;
-      padding: 20px;
       background: black;
-      font-size: 14px;
-      white-space: pre-line;
-      line-height: 1.4;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       color: #00ff00;
+      font-size: 14px;
+      padding: 20px;
+      white-space: pre-wrap;
+      overflow-y: auto;
     }
-
     .main-content {
       display: none;
-      padding: 50px;
-      animation: fadeIn 1.5s ease forwards;
+      padding: 50px 20px;
+      animation: fadeIn 2s ease forwards;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(50px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     section {
-      margin-bottom: 60px;
+      margin: 40px 0;
       opacity: 0;
-      transition: opacity 1s ease, transform 1s ease;
-      transform: translateY(30px);
+      transform: translateY(40px);
+      transition: all 0.8s ease;
     }
-
     section.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
-    h1, h2 {
-      color: #00ff00;
-      text-shadow: 0 0 5px #00ff00;
+    h1, h2, p {
+      margin-bottom: 20px;
     }
-
-    p {
-      font-size: 18px;
-    }
-
-    input, textarea, button {
-      background: #000;
-      border: 1px solid #00ff00;
-      color: #00ff00;
-      font-family: monospace;
-      padding: 10px;
+    .terminal-input {
+      position: fixed;
+      bottom: 0;
+      left: 0;
       width: 100%;
-      margin-top: 10px;
-    }
-
-    /* Fun With Eashan Shoutout */
-    .subscribe-box {
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
-      max-width: 400px;
-      backdrop-filter: blur(10px);
-      margin: 50px auto;
-      text-align: center;
-    }
-
-    .subscribe-box h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
+      background: #000;
       color: #00ff00;
+      padding: 10px;
+      font-family: 'Fira Code', monospace;
+      border-top: 1px solid #00ff00;
     }
-
-    .subscribe-box p {
-      font-size: 18px;
-      margin-bottom: 30px;
-    }
-
-    .subscribe-btn {
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: bold;
-      background: #ff0000;
+    input.command-line {
+      background: transparent;
       border: none;
-      color: white;
-      border-radius: 50px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      color: #00ff00;
+      width: 95%;
+      font-size: 14px;
+      outline: none;
     }
-
-    .subscribe-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #ff0000;
-    }
-
-    .youtube-logo {
-      width: 50px;
-      margin-bottom: 20px;
+    @keyframes fadeIn {
+      to {
+        display: block;
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="boot-screen" id="boot">
-    <div id="bootText"></div>
-    <audio id="typeSound" src="https://cdn.pixabay.com/download/audio/2022/03/31/audio_1fd66ed920.mp3?filename=keyboard-typing-80329.mp3" preload="auto"></audio>
-  </div>
+  <div class="boot-screen" id="bootScreen"></div>
 
-  <div class="main-content" id="content">
-    <section>
-      <h1>Hello, I'm Hrishikesh Reddy 👨‍💻</h1>
-      <p>Passionate about AI, coding, and tech. This is my personal portfolio site built with ❤️ in a terminal-inspired theme.</p>
+  <div class="main-content" id="mainContent">
+    <section id="about">
+      <h1>Hi, I'm Hrishikesh</h1>
+      <p>AI enthusiast | Future FAANG engineer | JEE Aspirant | Code wizard</p>
     </section>
 
-    <section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <ul>
+        <li>Python Calculator</li>
+        <li>Roblox Lua Timebomb Tool</li>
+        <li>Fun Portfolio Website</li>
+      </ul>
+    </section>
+
+    <section id="contact">
       <h2>Contact Me</h2>
-      <form action="https://getform.io/f/p9bgkxvb" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" required></textarea>
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="YOUR_KEY_HERE" />
+        <input type="text" name="name" placeholder="Your Name" required><br><br>
+        <input type="email" name="email" placeholder="Your Email" required><br><br>
+        <textarea name="message" placeholder="Your Message" required></textarea><br><br>
         <button type="submit">Send</button>
       </form>
     </section>
 
-    <div class="subscribe-box">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="youtube-logo">
-      <h1>Fun With Eashan</h1>
-      <p>Subscribe for fun, learning, and awesome videos!</p>
-      <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
-    </div>
+    <section id="shoutout">
+      <div class="subscribe-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="youtube-logo" width="50">
+        <h2>Fun With Eashan</h2>
+        <p>Subscribe for fun, learning, and awesome videos!</p>
+        <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
+      </div>
+    </section>
   </div>
 
+  <div class="terminal-input">
+    <span>&gt;</span> <input type="text" class="command-line" placeholder="Type a command like 'help', 'whoami'..." onkeydown="handleCommand(event)">
+  </div>
+
+  <audio id="typeSound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
+
   <script>
-    const lines = [
-      "Booting Hrishikesh Reddy Portfolio OS...",
-      "Initializing system...",
-      "Loading modules: [ AI_Core ] [ Web_Engine ] [ Portfolio_Gen ]",
-      "Establishing connection to neural network...",
-      "Verifying integrity of brainwaves...",
-      "Launching terminal interface...",
-      "Compiling creativity...",
-      "System Ready."
+    const logs = [
+      "[ OK ] Mounted /home.",
+      "[ OK ] Mounted /boot.",
+      "[INFO] Starting Hrishikesh Engine...",
+      "[ OK ] Linked portfolio modules.",
+      "[BOOT] Terminal instance launched.",
+      "[DONE] System ready.",
+      "",
+      "Starting Hrishikesh's Portfolio..."
     ];
 
-    const bootText = document.getElementById("bootText");
+    const bootScreen = document.getElementById("bootScreen");
+    const mainContent = document.getElementById("mainContent");
     const typeSound = document.getElementById("typeSound");
+
     let i = 0;
 
-    function playTyping() {
-      typeSound.currentTime = 0;
-      typeSound.play();
-    }
-
-    function showNextLine() {
-      if (i < lines.length) {
-        const line = document.createElement("div");
-        line.textContent = lines[i];
-        bootText.appendChild(line);
-        playTyping();
+    function typeLog() {
+      if (i < logs.length) {
+        bootScreen.innerHTML += logs[i] + "\\n";
+        typeSound.play();
         i++;
-        setTimeout(showNextLine, 900);
+        setTimeout(typeLog, 500);
       } else {
         setTimeout(() => {
-          document.getElementById("boot").style.display = "none";
-          const content = document.getElementById("content");
-          content.style.display = "block";
-          revealOnScroll(); // Reveal initial sections
+          bootScreen.style.display = "none";
+          mainContent.style.display = "block";
+          revealSections();
         }, 1000);
       }
     }
 
-    showNextLine();
-
-    // Scroll animation logic
-    const sections = document.querySelectorAll("section");
-    function revealOnScroll() {
-      sections.forEach(section => {
-        const top = section.getBoundingClientRect().top;
-        const winHeight = window.innerHeight;
-        if (top < winHeight - 100) section.classList.add("visible");
-        else section.classList.remove("visible");
+    function revealSections() {
+      const sections = document.querySelectorAll("section");
+      sections.forEach((sec, index) => {
+        setTimeout(() => sec.classList.add("visible"), index * 500);
       });
     }
-    window.addEventListener("scroll", revealOnScroll);
+
+    function handleCommand(e) {
+      if (e.key === "Enter") {
+        const val = e.target.value.toLowerCase();
+        switch(val) {
+          case "help":
+            alert("Commands: help, whoami, eashan, projects");
+            break;
+          case "whoami":
+            alert("Hrishikesh Reddy – AI nerd, JEE chad, code lover.");
+            break;
+          case "eashan":
+            alert("Shoutout to 'Fun With Eashan'!");
+            break;
+          case "projects":
+            alert("Projects: Calculator, Lua Timebomb Tool, Portfolio Website");
+            break;
+          default:
+            alert("Unknown command: " + val);
+        }
+        e.target.value = "";
+      }
+    }
+
+    window.onload = typeLog;
   </script>
 </body>
 </html>
