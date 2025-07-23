@@ -3,22 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Subscribe to Fun With Eashan</title>
+  <title>Hrishikesh’s Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
-      font-family: 'Montserrat', sans-serif;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
+      box-sizing: border-box;
     }
 
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+      color: white;
+      scroll-behavior: smooth;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    header {
+      padding: 40px;
+      text-align: center;
+      animation: popIn 1s ease-out;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #ff4b2b;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #ccc;
+    }
+
+    section {
+      padding: 50px 20px;
+      max-width: 800px;
+      margin: auto;
+      animation: slideInUp 1s ease;
+    }
+
+    h2 {
+      color: #ffd700;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      padding: 15px;
+      background: #ff4b2b;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background: #ff0000;
+      transform: scale(1.05);
+    }
+
+    footer {
+      margin-top: 60px;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Shoutout styling */
     .subscribe-box {
       background: rgba(255, 255, 255, 0.05);
       border: 2px solid rgba(255, 255, 255, 0.1);
@@ -27,6 +112,9 @@
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
       max-width: 400px;
       backdrop-filter: blur(10px);
+      margin: 40px auto;
+      text-align: center;
+      animation: fadeIn 2s ease;
     }
 
     .subscribe-box h1 {
@@ -62,14 +150,60 @@
       width: 50px;
       margin-bottom: 20px;
     }
+
   </style>
 </head>
 <body>
-  <div class="subscribe-box">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="youtube-logo">
-    <h1>Fun With Eashan</h1>
-    <p>Subscribe for fun, learning, and awesome videos!</p>
-    <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
-  </div>
+
+  <header>
+    <h1>Hrishikesh Reddy</h1>
+    <p>Future AI Architect | STEM Enthusiast | Coding Cool Stuff</p>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I love building things with code, exploring AI, and working on projects that make people go “woah.” I’m always learning and always curious. Whether it’s websites, AI bots, or experiments, I’m diving in.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form class="contact-form" onsubmit="sendForm(event)">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="subscribe-box">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="youtube-logo">
+      <h1>Fun With Eashan</h1>
+      <p>Subscribe for fun, learning, and awesome videos!</p>
+      <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
+    </div>
+  </footer>
+
+  <script>
+    function sendForm(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value,
+      };
+
+      // ⛔ Replace this with your actual API endpoint
+      fetch('https://your-contact-api.com/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.ok ? alert("✅ Message sent!") : alert("❌ Failed."))
+      .catch(err => alert("❌ Network error"));
+    }
+  </script>
+
 </body>
 </html>
