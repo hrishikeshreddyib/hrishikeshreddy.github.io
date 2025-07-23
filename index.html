@@ -14,14 +14,9 @@
 
     body {
       font-family: 'Fira Code', monospace;
-      background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+      background: black;
       color: #00ff00;
       overflow-x: hidden;
-    }
-
-    a {
-      color: #00ff00;
-      text-decoration: underline;
     }
 
     .boot-screen {
@@ -36,82 +31,18 @@
 
     .main-content {
       display: none;
-      padding: 40px 20px;
-      animation: fadeIn 1.5s ease-in-out forwards;
-    }
-
-    section {
-      margin: 60px 0;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
-    }
-
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    h1, h2 {
-      margin-bottom: 15px;
-      color: #00ffcc;
-    }
-
-    p, li {
-      margin-bottom: 10px;
-    }
-
-    ul {
-      list-style-type: square;
-      padding-left: 20px;
-    }
-
-    form input, form textarea, form button {
-      font-family: 'Fira Code', monospace;
-      font-size: 14px;
-      margin-bottom: 15px;
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #00ff00;
-      background: transparent;
-      color: #00ff00;
-      border-radius: 5px;
-    }
-
-    form button {
-      background: #00ff00;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    form button:hover {
-      background: #00cc00;
-    }
-
-    .subscribe-box {
-      background: #001a1a;
       padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      border: 1px solid #00ff00;
+      min-height: 100vh;
+      padding-bottom: 80px;
     }
 
-    .subscribe-box .subscribe-btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 20px;
-      background: #00ff00;
-      color: black;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
+    .terminal-output {
+      white-space: pre-wrap;
+      margin-bottom: 40px;
     }
 
-    .subscribe-box .subscribe-btn:hover {
-      background: #00cc00;
+    .terminal-line {
+      margin-bottom: 8px;
     }
 
     .terminal-input {
@@ -121,7 +52,8 @@
       width: 100%;
       background: #000;
       color: #00ff00;
-      padding: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
       border-top: 1px solid #00ff00;
       display: flex;
       align-items: center;
@@ -137,19 +69,14 @@
       outline: none;
     }
 
-    @keyframes fadeIn {
-      to {
-        display: block;
-        opacity: 1;
-      }
-    }
-
     @media (max-width: 600px) {
-      .main-content {
-        padding: 20px 10px;
+      .terminal-input {
+        flex-direction: column;
+        align-items: flex-start;
       }
-      form input, form textarea, form button {
-        font-size: 12px;
+
+      input.command-line {
+        width: 100%;
       }
     }
   </style>
@@ -157,41 +84,9 @@
 <body>
   <div class="boot-screen" id="bootScreen"></div>
 
-  <main class="main-content" id="mainContent">
-    <section id="about">
-      <h1>Hi, I'm Hrishikesh 👋</h1>
-      <p>i like ai, im a student of Class IX, i also like to mess with OSes</p>
-    </section>
-
-    <section id="projects">
-      <h2>Projects</h2>
-      <ul>
-        <li>Python Calculator</li>
-        <li>Roblox Lua Timebomb Tool</li>
-        <li>Fun Portfolio Website</li>
-      </ul>
-    </section>
-
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="YOUR_KEY_HERE" />
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" placeholder="Your Message" required rows="5"></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </section>
-
-    <section id="shoutout">
-      <div class="subscribe-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" width="50">
-        <h2>Fun With Eashan</h2>
-        <p>Subscribe for fun, learning, and awesome videos!</p>
-        <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank" rel="noopener">Subscribe</a>
-      </div>
-    </section>
-  </main>
+  <div class="main-content" id="mainContent">
+    <div class="terminal-output" id="terminalOutput"></div>
+  </div>
 
   <div class="terminal-input">
     <span>&gt;</span>
@@ -201,59 +96,109 @@
   <audio id="typeSound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
 
   <script>
-    const logs = [
-      "[ OK ] Mounted /home.",
-      "[ OK ] Mounted /boot.",
-      "[INFO] Starting Hrishikesh Engine...",
-      "[ OK ] Linked portfolio modules.",
-      "[INFO] Hi Eashan!",
-      "[BOOT] Terminal instance launched.",
-      "[DONE] System ready.",
-      "",
-      "Starting Hrishikesh's Portfolio..."
-    ];
-
     const bootScreen = document.getElementById("bootScreen");
     const mainContent = document.getElementById("mainContent");
+    const terminalOutput = document.getElementById("terminalOutput");
     const typeSound = document.getElementById("typeSound");
 
-    let i = 0;
+    const randomBootLines = [
+      "[ OK ] Mounted /home.",
+      "[ OK ] Mounted /boot.",
+      "[ OK ] Started Network Manager.",
+      "[ OK ] Started GNOME Display Manager.",
+      "[ OK ] Reached target Basic System.",
+      "[INFO] Initializing AI module...",
+      "[INFO] Starting Hrishikesh Engine...",
+      "[ OK ] Loaded Kernel Modules.",
+      "[ OK ] Reached target Graphical Interface.",
+      "[FAILED] Failed to start Bluetooth service.",
+      "[ OK ] Started Authorization Manager.",
+      "[ OK ] Created slice system-user.slice.",
+      "[ OK ] Started System Logging Service.",
+      "[ OK ] Started Virtual Memory Management.",
+      "[ OK ] Reached target Network.",
+      "[ OK ] Listening on CUPS Scheduler.",
+      "[ OK ] Started Hostname Service.",
+      "[ OK ] Started Time & Date Service.",
+      "[ OK ] Started D-Bus System Message Bus.",
+      "[ OK ] Detected CPU Architecture: x86_64",
+      "[ OK ] Linked portfolio modules.",
+      "[ OK ] Initialized Hrishikesh Terminal.",
+      "[ OK ] Activated resume from suspend.",
+      "[ OK ] Reached target User and Session",
+      "[BOOT] Terminal instance launched.",
+      "[ OK ] Mounted Hrishikesh's Brain™",
+      "[ OK ] AI engine warmed up...",
+      "[ OK ] Portfolio mode: ACTIVE",
+      "[ OK ] Loading custom commands...",
+      "[DONE] System ready."
+    ];
 
+    // Generate 40 boot lines including filler
+    const logs = [];
+    for (let i = 0; i < 37; i++) {
+      const randomIndex = Math.floor(Math.random() * randomBootLines.length);
+      logs.push(randomBootLines[randomIndex]);
+    }
+    logs.push("[ OK ] Boot complete.");
+    logs.push("Launching Hrishikesh's Portfolio...");
+
+    let i = 0;
     function typeLog() {
       if (i < logs.length) {
         bootScreen.innerHTML += logs[i] + "\n";
+        bootScreen.scrollTop = bootScreen.scrollHeight;
         typeSound.currentTime = 0;
         typeSound.play();
         i++;
-        setTimeout(typeLog, 500);
+        setTimeout(typeLog, 80);
       } else {
         setTimeout(() => {
           bootScreen.style.display = "none";
           mainContent.style.display = "block";
-          revealSections();
         }, 800);
       }
     }
 
-    function revealSections() {
-      const sections = document.querySelectorAll("section");
-      sections.forEach((sec, index) => {
-        setTimeout(() => sec.classList.add("visible"), index * 400);
-      });
-    }
-
     function handleCommand(e) {
       if (e.key === "Enter") {
-        const val = e.target.value.trim().toLowerCase();
-        const output = {
-          help: "type this Commands i. the terminal: help, whoami, eashan, projects",
-          whoami: "youre the viewer!.",
-          eashan: "Shoutout to 'Fun With Eashan'!",
-          projects: "Projects: Calculator, Lua Timebomb Tool, Portfolio Website"
-        };
-        alert(output[val] || `Unknown command: '${val}'`);
+        const val = e.target.value.trim();
+        if (val === "") return;
+
+        // Print input
+        appendToTerminal("> " + val);
+
+        const lowerVal = val.toLowerCase();
+        switch (lowerVal) {
+          case "help":
+            appendToTerminal("Available commands: help, whoami, projects, eashan, clear");
+            break;
+          case "whoami":
+            appendToTerminal("Hrishikesh Reddy – AI nerd, JEE chad, code lover.");
+            break;
+          case "projects":
+            appendToTerminal("1. Python Calculator\n2. Roblox Lua Timebomb Tool\n3. Fun Portfolio Website");
+            break;
+          case "eashan":
+            appendToTerminal("Shoutout to 'Fun With Eashan'!\nhttps://youtube.com/@funwitheashan1219");
+            break;
+          case "clear":
+            terminalOutput.innerHTML = "";
+            break;
+          default:
+            appendToTerminal(`Command not found: ${val}`);
+        }
+
         e.target.value = "";
+        terminalOutput.scrollTop = terminalOutput.scrollHeight;
       }
+    }
+
+    function appendToTerminal(text) {
+      const line = document.createElement("div");
+      line.className = "terminal-line";
+      line.textContent = text;
+      terminalOutput.appendChild(line);
     }
 
     window.onload = typeLog;
