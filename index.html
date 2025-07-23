@@ -3,45 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hrishikesh's Hacker Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <title>Hrishikesh Reddy – Portfolio</title>
   <style>
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background-color: #000;
-      font-family: 'Share Tech Mono', monospace;
-      color: #00ff00;
-      scroll-behavior: smooth;
-    }
-
-    header {
-      text-align: center;
-      padding: 60px 20px;
-      border-bottom: 1px solid #00ff00;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      text-shadow: 0 0 10px #00ff00;
-    }
-
-    header p {
-      margin-top: 10px;
+      height: 100%;
+      font-family: 'Courier New', monospace;
+      background: black;
+      overflow-x: hidden;
       color: #00ff88;
-      text-shadow: 0 0 5px #00ff88;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://media.tenor.com/xUPIfBfGOfEAAAAC/matrix.gif') repeat;
+      background-size: cover;
+      opacity: 0.05;
+      z-index: -1;
+    }
+
+    .typewriter h1 {
+      overflow: hidden;
+      border-right: .15em solid #00ff88;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: .15em;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 20vh;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #00ff88 }
     }
 
     section {
+      padding: 80px 20px;
       max-width: 800px;
-      margin: 60px auto;
-      padding: 20px;
+      margin: auto;
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(40px);
       transition: all 0.6s ease;
     }
 
@@ -51,158 +63,146 @@
     }
 
     h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      text-shadow: 0 0 8px #00ff00;
+      color: #00ffaa;
+      font-size: 28px;
+      margin-bottom: 10px;
     }
 
     p {
-      font-size: 1.1rem;
-      line-height: 1.7;
+      font-size: 17px;
+      line-height: 1.6;
     }
 
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      background: #000;
-      border: 1px solid #00ff00;
-      color: #00ff00;
-      padding: 15px;
-      font-size: 1rem;
-      border-radius: 4px;
+    .contact-form input, .contact-form textarea {
+      background: black;
+      border: 1px solid #00ff88;
+      color: #00ff88;
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 15px;
+      font-family: 'Courier New', monospace;
     }
 
     .contact-form button {
-      background: #000;
-      color: #00ff00;
-      border: 2px solid #00ff00;
-      padding: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    .contact-form button:hover {
-      background: #00ff00;
-      color: #000;
-      box-shadow: 0 0 10px #00ff00;
-    }
-
-    footer {
-      text-align: center;
-      padding: 50px 20px;
-      border-top: 1px solid #00ff00;
-    }
-
-    .subscribe-box {
-      max-width: 400px;
-      margin: 40px auto;
-      padding: 30px;
-      border: 1px dashed #00ff00;
-      border-radius: 10px;
-      box-shadow: 0 0 15px #00ff00;
-    }
-
-    .subscribe-box h1 {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-    }
-
-    .subscribe-box p {
-      margin-bottom: 20px;
-    }
-
-    .subscribe-btn {
       padding: 10px 20px;
-      font-size: 1rem;
-      background: #00ff00;
-      color: #000;
       border: none;
-      border-radius: 50px;
+      background: #00ff88;
+      color: black;
+      font-weight: bold;
       cursor: pointer;
+      font-family: 'Courier New', monospace;
       transition: 0.3s;
     }
 
+    .contact-form button:hover {
+      background: #00ffaa;
+      box-shadow: 0 0 10px #00ffaa;
+    }
+
+    .glitch:hover {
+      text-shadow: 
+        1px 0 red,
+        -1px 0 blue;
+      animation: glitch 0.3s infinite;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-1px, 1px); }
+      40% { transform: translate(-1px, -1px); }
+      60% { transform: translate(1px, 1px); }
+      80% { transform: translate(1px, -1px); }
+      100% { transform: translate(0); }
+    }
+
+    .subscribe-box {
+      background: rgba(0, 255, 136, 0.05);
+      border: 2px solid rgba(0, 255, 136, 0.2);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .subscribe-box h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #00ffaa;
+    }
+
+    .subscribe-box p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .subscribe-btn {
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      background: #00ff88;
+      border: none;
+      color: black;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
     .subscribe-btn:hover {
-      background: #000;
-      color: #00ff00;
-      border: 1px solid #00ff00;
-      box-shadow: 0 0 10px #00ff00;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffaa;
     }
 
     .youtube-logo {
-      width: 40px;
-      margin-bottom: 10px;
-      filter: brightness(0) saturate(100%) invert(73%) sepia(78%) saturate(2082%) hue-rotate(84deg) brightness(90%) contrast(104%);
+      width: 50px;
+      margin-bottom: 20px;
     }
 
-    a {
-      color: #00ff00;
-      text-decoration: underline;
+    @media(max-width: 600px) {
+      .typewriter h1 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Hrishikesh Reddy</h1>
-    <p>AI / Coding / Fun Projects</p>
-  </header>
+  <div class="typewriter">
+    <h1>booting Hrishikesh's website...</h1>
+  </div>
 
-  <section id="about" class="scroll-section">
-    <h2>About Me</h2>
-    <p>
-      I’m a curious developer who loves building AI tools, working on cool experiments, and making websites like this one. Always learning. Always shipping. 😎
-    </p>
+  <section class="glitch">
+    <h2>👨‍💻 About Me</h2>
+    <p>i like coding and messing with code, Operating systems 👾.</p>
   </section>
 
-  <section id="contact" class="scroll-section">
-    <h2>Contact Me</h2>
-    <form class="contact-form" onsubmit="sendForm(event)">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
+  <section>
+    <h2>📂 Projects</h2>
+    <p>From calculators to Roblox Lua scripts, I've built a variety of projects. Stay tuned, more coming soon!</p>
+  </section>
+
+  <section>
+    <h2>📬 Contact Me</h2>
+    <form class="contact-form" action="https://formspree.io/f/xwkrvyzo" method="POST">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+      <button type="submit">=> Send</button>
     </form>
   </section>
 
-  <footer class="scroll-section">
+  <section>
     <div class="subscribe-box">
       <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="youtube-logo">
       <h1>Fun With Eashan</h1>
-      <p>Subscribe for awesome, entertaining, and fun videos!</p>
+      <p>Subscribe for fun, learning, and awesome videos!</p>
       <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
     </div>
-  </footer>
+  </section>
 
   <script>
-    function sendForm(e) {
-      e.preventDefault();
-      const form = e.target;
-      const data = {
-        name: form.name.value,
-        email: form.email.value,
-        message: form.message.value,
-      };
-
-      // 🚨 Replace this with your actual endpoint
-      fetch('https://your-contact-api.com/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-      .then(res => res.ok ? alert("✅ Sent!") : alert("❌ Failed to send"))
-      .catch(() => alert("❌ Network Error"));
-    }
-
-    // Scroll animation logic
-    const sections = document.querySelectorAll('.scroll-section');
-
+    // Scroll-triggered fade-in
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -211,12 +211,11 @@
           entry.target.classList.remove('visible');
         }
       });
-    }, {
-      threshold: 0.1
     });
 
-    sections.forEach(sec => observer.observe(sec));
+    document.querySelectorAll('section').forEach(sec => {
+      observer.observe(sec);
+    });
   </script>
-
 </body>
 </html>
