@@ -224,14 +224,25 @@
     <section class="fade-in" id="contact">
       <h2>Contact Me (inwcmwg)</h2>
       <form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value=" b4d6d69c-e057-450c-b1c3-d7824c5abb28 " />
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" placeholder="Your Message" required rows="5"></textarea>
-        <button type="submit">Send</button>
-      </form>
-    </section>
 
+    <!-- Replace with your Access Key -->
+    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+
+    <!-- Form Inputs. Each input must have a name="" attribute -->
+    <input type="text" name="name" required>
+    <input type="email" name="email" required>
+    <textarea name="message" required></textarea>
+
+    <!-- Honeypot Spam Protection -->
+    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+    <!-- Custom Confirmation / Success Page -->
+    <!-- <input type="hidden" name="redirect" value="https://mywebsite.com/thanks.html"> -->
+
+    <button type="submit">Submit Form</button>
+
+</form>
+    </section>
     <section class="fade-in" id="shoutout">
       <div class="subscribe-box">
         <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" width="50">
