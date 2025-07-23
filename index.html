@@ -6,34 +6,56 @@
   <title>Hrishikesh Reddy's Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --green: #00ff00;
+      --green-hover: #00cc00;
+      --bg-gradient: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       font-family: 'Fira Code', monospace;
-      background: black;
-      color: #00ff00;
+      background: var(--bg-gradient);
+      color: var(--green);
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     a {
-      color: #00ff00;
+      color: var(--green);
       text-decoration: underline;
     }
 
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Boot Screen */
     .boot-screen {
       height: 100vh;
       background: black;
-      color: #00ff00;
+      color: var(--green);
       font-size: 14px;
       padding: 20px;
       white-space: pre-wrap;
       overflow-y: auto;
     }
 
+    /* Main Content */
     .main-content {
       display: none;
       padding: 40px 20px 100px;
@@ -48,22 +70,48 @@
       margin-bottom: 10px;
     }
 
-    ul {
-      padding-left: 20px;
+    form input, form textarea, form button {
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      padding: 10px;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--green);
+      color: var(--green);
+      margin-bottom: 15px;
+      border-radius: 5px;
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    form input:focus, form textarea:focus {
+      border-color: var(--green-hover);
+      background-color: rgba(0, 0, 0, 0.7);
+      outline: none;
+    }
+
+    form button {
+      background: var(--green);
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: var(--green-hover);
     }
 
     .subscribe-box {
-      background: #001a1a;
+      background: rgba(0, 20, 20, 0.7);
       padding: 20px;
       border-radius: 10px;
       text-align: center;
-      border: 1px solid #00ff00;
+      border: 1px solid var(--green);
     }
 
     .subscribe-btn {
       margin-top: 10px;
       padding: 8px 20px;
-      background: #00ff00;
+      background: var(--green);
       color: black;
       text-decoration: none;
       border-radius: 4px;
@@ -72,18 +120,19 @@
     }
 
     .subscribe-btn:hover {
-      background: #00cc00;
+      background: var(--green-hover);
     }
 
+    /* Terminal Bar */
     .terminal-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: #000;
-      color: #00ff00;
+      background: black;
+      color: var(--green);
       padding: 10px 20px;
-      border-top: 1px solid #00ff00;
+      border-top: 1px solid var(--green);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -94,11 +143,12 @@
       flex: 1;
       background: transparent;
       border: none;
-      color: #00ff00;
+      color: var(--green);
       font-size: 14px;
       outline: none;
     }
 
+    /* Full Terminal */
     .full-terminal {
       position: fixed;
       top: 0;
@@ -106,7 +156,7 @@
       width: 100%;
       height: 100%;
       background: black;
-      color: #00ff00;
+      color: var(--green);
       padding: 20px;
       overflow-y: auto;
       display: none;
@@ -138,6 +188,17 @@
     .close-terminal:hover {
       background: #cc0022;
     }
+
+    @media (max-width: 600px) {
+      form input, form textarea {
+        font-size: 12px;
+      }
+
+      .terminal-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
   </style>
 </head>
 <body>
@@ -146,12 +207,12 @@
 
   <!-- Main Content -->
   <div class="main-content" id="mainContent">
-    <section id="about">
+    <section class="fade-in" id="about">
       <h1>Hi, I'm Hrishikesh 👋</h1>
       <p>AI enthusiast | Future FAANG engineer | JEE Aspirant | Code wizard</p>
     </section>
 
-    <section id="projects">
+    <section class="fade-in" id="projects">
       <h2>Projects</h2>
       <ul>
         <li>Python Calculator</li>
@@ -160,18 +221,18 @@
       </ul>
     </section>
 
-    <section id="contact">
+    <section class="fade-in" id="contact">
       <h2>Contact Me</h2>
       <form action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="YOUR_KEY_HERE" />
-        <input type="text" name="name" placeholder="Your Name" required><br><br>
-        <input type="email" name="email" placeholder="Your Email" required><br><br>
-        <textarea name="message" placeholder="Your Message" required rows="5"></textarea><br><br>
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required rows="5"></textarea>
         <button type="submit">Send</button>
       </form>
     </section>
 
-    <section id="shoutout">
+    <section class="fade-in" id="shoutout">
       <div class="subscribe-box">
         <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" width="50">
         <h2>Fun With Eashan</h2>
@@ -208,34 +269,21 @@
 
     const bootLines = [
       "[ OK ] Mounted /home.",
-      "[ OK ] Mounted /boot.",
-      "[ OK ] Started Network Manager.",
       "[ OK ] Started GNOME Display Manager.",
-      "[ OK ] Reached target Basic System.",
-      "[INFO] Initializing AI module...",
       "[ OK ] Loaded Kernel Modules.",
-      "[ OK ] Reached target Graphical Interface.",
-      "[FAILED] Failed to start Bluetooth service.",
-      "[ OK ] Started Authorization Manager.",
-      "[ OK ] Created slice system-user.slice.",
-      "[ OK ] Started System Logging Service.",
-      "[ OK ] Started Virtual Memory Management.",
-      "[ OK ] Reached target Network.",
-      "[ OK ] Listening on CUPS Scheduler.",
-      "[ OK ] Started Hostname Service.",
-      "[ OK ] Started Time & Date Service.",
-      "[ OK ] Started D-Bus System Message Bus.",
-      "[ OK ] Detected CPU Architecture: x86_64",
+      "[ OK ] Started Network Manager.",
+      "[ OK ] Initialized Hrishikesh Engine.",
+      "[ OK ] AI Personality Booted...",
       "[ OK ] Linked portfolio modules.",
-      "[ OK ] Initialized Hrishikesh Terminal.",
-      "[ OK ] Activated resume from suspend.",
-      "[ OK ] Reached target User and Session",
-      "[BOOT] Terminal instance launched.",
-      "[ OK ] Mounted Hrishikesh's Brain™",
-      "[ OK ] AI engine warmed up...",
+      "[ OK ] Terminal interface active.",
+      "[ OK ] Started System Logging Service.",
+      "[FAILED] Failed to start Bluetooth.",
       "[ OK ] Portfolio mode: ACTIVE",
-      "[ OK ] Loading custom commands...",
-      "[DONE] System ready.",
+      "[ OK ] Listening on Web3Forms API.",
+      "[ OK ] Reached target User Session.",
+      "[ OK ] Mounted Hrishikesh's Brain™",
+      "[BOOT] Terminal ready.",
+      "[DONE] System Ready.",
       "Launching Hrishikesh's Portfolio..."
     ];
 
@@ -253,6 +301,10 @@
         setTimeout(() => {
           bootScreen.style.display = "none";
           mainContent.style.display = "block";
+          document.querySelectorAll('.fade-in').forEach((el, idx) => {
+            el.style.animationDelay = `${0.2 + idx * 0.2}s`;
+            el.classList.add('fade-in');
+          });
         }, 500);
       }
     }
@@ -292,7 +344,7 @@
       const lower = cmd.toLowerCase();
       switch (lower) {
         case "help":
-          appendToTerminal("Available commands: help, whoami, projects, eashan, clear");
+          appendToTerminal("Available commands:\n- help\n- whoami\n- projects\n- eashan\n- clear");
           break;
         case "whoami":
           appendToTerminal("Hrishikesh Reddy – AI nerd, JEE chad, code lover.");
