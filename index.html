@@ -3,98 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hrishikesh Reddy | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <title>Hrishikesh Reddy – Portfolio</title>
   <style>
     * {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       box-sizing: border-box;
     }
-
     body {
-      font-family: 'Share Tech Mono', monospace;
-      background: #000;
+      background: radial-gradient(#001100, #000000);
+      font-family: 'Courier New', monospace;
       color: #00ff00;
       overflow-x: hidden;
     }
 
-    #boot {
-      white-space: pre-wrap;
-      padding: 20px;
+    /* Animated background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 200%; height: 200%;
+      background-image: repeating-linear-gradient(45deg, rgba(0,255,0,0.05) 0px, transparent 1px),
+                        repeating-linear-gradient(-45deg, rgba(0,255,0,0.05) 0px, transparent 1px);
+      animation: moveBackground 30s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes moveBackground {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50%, -50%); }
+    }
+
+    .boot-screen {
       height: 100vh;
-      background-color: #000;
-      font-size: 16px;
+      padding: 20px;
+      background: black;
+      font-size: 14px;
+      white-space: pre-line;
+      line-height: 1.4;
+      overflow: hidden;
       display: flex;
+      justify-content: center;
       align-items: center;
+      color: #00ff00;
     }
 
-    #main {
-      opacity: 0;
-      transition: opacity 2s ease;
-      background: linear-gradient(270deg, #001100, #003300, #001100);
-      background-size: 600% 600%;
-      animation: bgShift 15s ease infinite;
-      min-height: 100vh;
-      padding: 50px 20px;
+    .main-content {
+      display: none;
+      padding: 50px;
+      animation: fadeIn 1.5s ease forwards;
     }
 
-    @keyframes bgShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     section {
-      margin: 80px auto;
-      max-width: 800px;
+      margin-bottom: 60px;
       opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 1.5s ease, transform 1.5s ease;
+      transition: opacity 1s ease, transform 1s ease;
+      transform: translateY(30px);
     }
 
     section.visible {
       opacity: 1;
-      transform: translateY(0px);
+      transform: translateY(0);
     }
 
     h1, h2 {
       color: #00ff00;
+      text-shadow: 0 0 5px #00ff00;
     }
 
-    p, a, label {
-      color: #ccffcc;
+    p {
       font-size: 18px;
     }
 
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      background: #002200;
+    input, textarea, button {
+      background: #000;
       border: 1px solid #00ff00;
       color: #00ff00;
-      font-family: inherit;
-      font-size: 16px;
+      font-family: monospace;
+      padding: 10px;
+      width: 100%;
+      margin-top: 10px;
     }
 
-    button {
-      background: #00aa00;
-      color: black;
-      padding: 10px 20px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
-
+    /* Fun With Eashan Shoutout */
     .subscribe-box {
       background: rgba(255, 255, 255, 0.05);
       border: 2px solid rgba(255, 255, 255, 0.1);
       padding: 40px;
       border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
       max-width: 400px;
-      margin: 0 auto;
       backdrop-filter: blur(10px);
+      margin: 50px auto;
       text-align: center;
+    }
+
+    .subscribe-box h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #00ff00;
+    }
+
+    .subscribe-box p {
+      font-size: 18px;
+      margin-bottom: 30px;
     }
 
     .subscribe-btn {
@@ -122,82 +138,87 @@
   </style>
 </head>
 <body>
-  <div id="boot"></div>
+  <div class="boot-screen" id="boot">
+    <div id="bootText"></div>
+    <audio id="typeSound" src="https://cdn.pixabay.com/download/audio/2022/03/31/audio_1fd66ed920.mp3?filename=keyboard-typing-80329.mp3" preload="auto"></audio>
+  </div>
 
-  <div id="main">
-    <section id="intro">
-      <h1>Hey, I'm Hrishikesh</h1>
-      <p>Welcome to my portfolio. I love AI, coding, STEM, and building cool stuff.</p>
+  <div class="main-content" id="content">
+    <section>
+      <h1>Hello, I'm Hrishikesh Reddy 👨‍💻</h1>
+      <p>Passionate about AI, coding, and tech. This is my personal portfolio site built with ❤️ in a terminal-inspired theme.</p>
     </section>
 
-    <section id="projects">
-      <h2>🚀 Projects</h2>
-      <p>I make Python tools, AI experiments, Roblox scripts, and cool digital builds. Always learning, always hacking.</p>
-    </section>
-
-    <section id="contact">
-      <h2>📬 Contact Me</h2>
-      <form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="YOUR_API_KEY_HERE">
-        <label>Name:</label><br>
-        <input type="text" name="name" required><br><br>
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
-        <label>Message:</label><br>
-        <textarea name="message" rows="5" required></textarea><br><br>
+    <section>
+      <h2>Contact Me</h2>
+      <form action="https://getform.io/f/p9bgkxvb" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required></textarea>
         <button type="submit">Send</button>
       </form>
     </section>
 
-    <section id="shoutout">
-      <div class="subscribe-box">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="youtube-logo">
-        <h1>Fun With Eashan</h1>
-        <p>Subscribe for fun, learning, and awesome videos!</p>
-        <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
-      </div>
-    </section>
+    <div class="subscribe-box">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_(2017).svg" alt="YouTube" class="youtube-logo">
+      <h1>Fun With Eashan</h1>
+      <p>Subscribe for fun, learning, and awesome videos!</p>
+      <a class="subscribe-btn" href="https://youtube.com/@funwitheashan1219?si=k-3crZLqzdtWhm1H" target="_blank">Subscribe</a>
+    </div>
   </div>
 
   <script>
-    const bootLines = [
-      "Booting HrishikeshOS v1.0...",
+    const lines = [
+      "Booting Hrishikesh Reddy Portfolio OS...",
       "Initializing system...",
-      "Loading AI modules...",
-      "Setting up coding environment...",
-      "Calibrating sensors...",
-      "Connecting to web3...",
-      "Fetching terminal logs...",
-      "Starting portfolio...",
-      "System ready."
+      "Loading modules: [ AI_Core ] [ Web_Engine ] [ Portfolio_Gen ]",
+      "Establishing connection to neural network...",
+      "Verifying integrity of brainwaves...",
+      "Launching terminal interface...",
+      "Compiling creativity...",
+      "System Ready."
     ];
 
-    const bootDiv = document.getElementById("boot");
-    let lineIndex = 0;
+    const bootText = document.getElementById("bootText");
+    const typeSound = document.getElementById("typeSound");
+    let i = 0;
 
-    function showBootLine() {
-      if (lineIndex < bootLines.length) {
-        bootDiv.textContent += bootLines[lineIndex] + "\n";
-        lineIndex++;
-        setTimeout(showBootLine, 300);
+    function playTyping() {
+      typeSound.currentTime = 0;
+      typeSound.play();
+    }
+
+    function showNextLine() {
+      if (i < lines.length) {
+        const line = document.createElement("div");
+        line.textContent = lines[i];
+        bootText.appendChild(line);
+        playTyping();
+        i++;
+        setTimeout(showNextLine, 900);
       } else {
-        document.getElementById("main").style.opacity = 1;
-        bootDiv.style.display = "none";
+        setTimeout(() => {
+          document.getElementById("boot").style.display = "none";
+          const content = document.getElementById("content");
+          content.style.display = "block";
+          revealOnScroll(); // Reveal initial sections
+        }, 1000);
       }
     }
 
-    showBootLine();
+    showNextLine();
 
-    // Scroll Animations
+    // Scroll animation logic
     const sections = document.querySelectorAll("section");
-    window.addEventListener("scroll", () => {
-      const triggerBottom = window.innerHeight * 0.85;
-      sections.forEach(sec => {
-        const top = sec.getBoundingClientRect().top;
-        if (top < triggerBottom) sec.classList.add("visible");
-        else sec.classList.remove("visible");
+    function revealOnScroll() {
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        const winHeight = window.innerHeight;
+        if (top < winHeight - 100) section.classList.add("visible");
+        else section.classList.remove("visible");
       });
-    });
+    }
+    window.addEventListener("scroll", revealOnScroll);
   </script>
 </body>
 </html>
